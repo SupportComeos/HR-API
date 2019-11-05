@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Users")
-public class Users  {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,9 +15,6 @@ public class Users  {
 
     @Column(name = "Password")
     private String password;
-
-    @Column(name = "SalarieID")
-    private long collaborateurid;
 
     @Column(name = "VIP")
     private long vip;
@@ -30,6 +27,13 @@ public class Users  {
 
     @Column(name = "Actif")
     private long actif;
+
+    @Column(name = "SalarieID")
+    private long salarieid;
+
+    @ManyToOne
+    @JoinColumn(name="SalarieID", nullable = false, updatable = false, insertable = false)
+    private Salaries salaries;
 
     public long getId() {
         return id;
@@ -53,14 +57,6 @@ public class Users  {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public long getCollaborateurid() {
-        return collaborateurid;
-    }
-
-    public void setCollaborateurid(long collaborateurid) {
-        this.collaborateurid = collaborateurid;
     }
 
     public long getVip() {
@@ -93,5 +89,21 @@ public class Users  {
 
     public void setActif(long actif) {
         this.actif = actif;
+    }
+
+    public long getSalarieid() {
+        return salarieid;
+    }
+
+    public void setSalarieid(long salarieid) {
+        this.salarieid = salarieid;
+    }
+
+    public Salaries getSalaries() {
+        return salaries;
+    }
+
+    public void setSalaries(Salaries salaries) {
+        this.salaries = salaries;
     }
 }

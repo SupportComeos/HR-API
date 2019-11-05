@@ -25,7 +25,7 @@ public class UsersController {
     @PostMapping("/Users")
     public Users findUser(@RequestBody UsersDTO usersDTO) {
         try {
-            return usersRepository.findUserByLogin(usersDTO.getUsername(), getMD5(usersDTO.getPassword()));
+            return usersRepository.findUser(usersDTO.getUsername(), getMD5(usersDTO.getPassword()));
         } catch (Exception e) {
             HikaadLogger.error(e.toString());
             return new Users();
