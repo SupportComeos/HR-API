@@ -1,6 +1,7 @@
-package com.hikaad;
+package com.hikaad.security;
 
 import com.hikaad.global.service.UsersService;
+import com.hikaad.utils.HikaadLogger;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,7 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class AppAuthProvider extends DaoAuthenticationProvider {
 
-    private UsersService usersService;
+    private static final    String          MODULE          = "{AppAuthProvider} - ";
+    private                 UsersService    usersService;
 
     AppAuthProvider(UsersService usersService) {
         this.usersService = usersService;
@@ -18,17 +20,16 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) {
         UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
-        String name = auth.getName();
-        String password = auth.getCredentials().toString();
-        UserDetails user = usersService.loadUser(name, password);
-        if (user == null) {
+        UserDetails user = usersService.loadUser(auth.getName(), auth.getCredentials().toString());
+        if (null == user) {
+            HikaadLogger.error(MODULE + "Username/Password does not match for " + auth.getPrincipal());
             throw new BadCredentialsException("Username/Password does not match for " + auth.getPrincipal());
         }
         return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }
+
     @Override
     public boolean supports(Class<?> authentication) {
         return true;
     }
-
 }

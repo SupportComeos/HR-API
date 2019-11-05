@@ -1,4 +1,4 @@
-package com.hikaad;
+package com.hikaad.security;
 
 import com.hikaad.global.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,26 +10,30 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    private UsersService usersService;
+
     @Autowired
-    UsersService usersService;
+    public SecurityConfig(UsersService usersService) {
+        this.usersService = usersService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usersService);
+        auth.userDetailsService(usersService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -58,18 +62,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
     }
 
-    private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    private static class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request,
-                                            HttpServletResponse response, Authentication authentication)
-                throws IOException, ServletException {
+                                            HttpServletResponse response, Authentication authentication) {
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
-    private class AuthentificationLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
+    private static class AuthentificationLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                    Authentication authentication) throws IOException, ServletException {
+                                    Authentication authentication) {
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }

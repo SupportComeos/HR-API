@@ -21,7 +21,7 @@ public class UsersService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return null;
+        throw new UsernameNotFoundException("User not found");
     }
 
     public UserDetails loadUser(String username, String password)  {
