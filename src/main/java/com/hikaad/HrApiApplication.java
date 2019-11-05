@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class HrApiApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(HrApiApplication.class, args);
+        SpringApplication.run(HrApiApplication.class);
     }
 
 }
