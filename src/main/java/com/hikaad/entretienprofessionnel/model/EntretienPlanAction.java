@@ -1,5 +1,7 @@
 package com.hikaad.entretienprofessionnel.model;
 
+import com.hikaad.global.model.Salaries;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,6 +15,10 @@ public class EntretienPlanAction {
 
     @Column(name = "Salarieid")
     private long collaborateurid;
+
+    @ManyToOne
+    @JoinColumn(name="Salarieid", nullable = false, updatable = false, insertable = false)
+    private Salaries collaborateur;
 
     @Column(name = "Annee")
     private long annee;
@@ -95,5 +101,13 @@ public class EntretienPlanAction {
 
     public void setPrecision(String precision) {
         this.precision = precision;
+    }
+
+    public Salaries getCollaborateur() {
+        return collaborateur;
+    }
+
+    public void setCollaborateur(Salaries collaborateur) {
+        this.collaborateur = collaborateur;
     }
 }

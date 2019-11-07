@@ -106,4 +106,5 @@ public class Users {
     public void setSalaries(Salaries salaries) {
         this.salaries = salaries;
     }
+
 }

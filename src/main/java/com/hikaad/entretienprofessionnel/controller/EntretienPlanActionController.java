@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,16 @@ public class EntretienPlanActionController {
                                                    @PathVariable Long year) {
         try {
             return entretienPlanActionRepository.getAll(id, year);
+        } catch (Exception e) {
+            HikaadLogger.error(e.toString());
+            return Collections.emptyList();
+        }
+    }
+
+    @GetMapping("/EntretienProfessionnel/Fiche/PlanAction/ASuivre/{collaborateurid}")
+    public List<EntretienPlanAction> getConclusion(@PathVariable Long collaborateurid) {
+        try {
+            return entretienPlanActionRepository.getAll(collaborateurid, new Date());
         } catch (Exception e) {
             HikaadLogger.error(e.toString());
             return Collections.emptyList();

@@ -34,7 +34,6 @@ public interface ActionRepository extends JpaRepository<Action, Long> {
 
 
 
-
     @Query("select a from Action a where a.avancementid = 3 and (a.raisonnonretenue is null or a.raisonnonretenue = '') order by a.creationdate desc")
     List<Action> getAllFini();
 
