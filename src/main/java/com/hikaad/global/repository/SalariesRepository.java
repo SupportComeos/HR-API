@@ -2,9 +2,11 @@ package com.hikaad.global.repository;
 
 import com.hikaad.global.model.Salaries;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -88,5 +90,10 @@ public interface SalariesRepository extends JpaRepository<Salaries, Long> {
     @Query("select s1 from Salaries s1 where s1.id in (select distinct(s2.responsableid) from Salaries s2 order by s2.lastname, s2.firstname)")
     List<Salaries> findResponsable();
 
+    @Modifying
+    @Transactional
+    @Query("update Salaries s set s.dateentretienprofessionnel = :today, s.stepentretienprofessionnel = 2 where s.id = :collaborateurid")
+    void updateEPDate(@Param("collaborateurid") Long collaborateurid,
+                      @Param("today") Date today);
 
 }

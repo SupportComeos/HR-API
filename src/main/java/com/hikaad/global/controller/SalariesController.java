@@ -211,4 +211,17 @@ public class SalariesController {
             return new Salaries();
         }
     }
+
+    @GetMapping("/EntretienProfessionnel/Plan/{collaborateurid}/{dateEntretien}")
+    public boolean planEp(@PathVariable Long collaborateurid,
+                       @PathVariable String dateEntretien) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            salariesRepository.updateEPDate(collaborateurid, simpleDateFormat.parse(dateEntretien));
+            return true;
+        } catch (Exception e) {
+            HikaadLogger.error(e.toString());
+            return false;
+        }
+    }
 }
