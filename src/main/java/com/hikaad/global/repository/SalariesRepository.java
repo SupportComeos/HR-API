@@ -92,8 +92,10 @@ public interface SalariesRepository extends JpaRepository<Salaries, Long> {
 
     @Modifying
     @Transactional
-    @Query("update Salaries s set s.dateentretienprofessionnel = :today, s.stepentretienprofessionnel = 2 where s.id = :collaborateurid")
+    @Query("update Salaries s set s.dateentretienprofessionnel = :today, s.heureep = :heure, s.minuteep = :minute, s.stepentretienprofessionnel = 2 where s.id = :collaborateurid")
     void updateEPDate(@Param("collaborateurid") Long collaborateurid,
-                      @Param("today") Date today);
+                      @Param("today") Date today,
+                      @Param("heure") String heure,
+                      @Param("minute") String minute);
 
 }

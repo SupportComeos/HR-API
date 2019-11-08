@@ -212,12 +212,13 @@ public class SalariesController {
         }
     }
 
-    @GetMapping("/EntretienProfessionnel/Plan/{collaborateurid}/{dateEntretien}")
+    @GetMapping("/EntretienProfessionnel/Plan/{collaborateurid}/{dateEntretien}/{heureentretien}")
     public boolean planEp(@PathVariable Long collaborateurid,
-                       @PathVariable String dateEntretien) {
+                          @PathVariable String dateEntretien,
+                          @PathVariable String heureentretien) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            salariesRepository.updateEPDate(collaborateurid, simpleDateFormat.parse(dateEntretien));
+            salariesRepository.updateEPDate(collaborateurid, simpleDateFormat.parse(dateEntretien), heureentretien.split(":")[0], heureentretien.split(":")[1]);
             return true;
         } catch (Exception e) {
             HikaadLogger.error(e.toString());
