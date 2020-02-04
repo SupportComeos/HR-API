@@ -43,6 +43,38 @@ public class EntretienPlanActionController {
         }
     }
 
+    @GetMapping("/EntretienProfessionnel/Fiche/PlanAction/All/{collaborateurid}")
+    public List<EntretienPlanAction> getConclusionAll(@PathVariable Long collaborateurid) {
+        try {
+            return entretienPlanActionRepository.getAll(collaborateurid);
+        } catch (Exception e) {
+            HikaadLogger.error(e.toString());
+            return Collections.emptyList();
+        }
+    }
+
+    @GetMapping("/EntretienProfessionnel/PlanAction/Done/{id}")
+    public boolean doneAction(@PathVariable Long id) {
+        try {
+            entretienPlanActionRepository.updateDone(id, new Date());
+            return true;
+        } catch (Exception e) {
+            HikaadLogger.error(e.toString());
+            return false;
+        }
+    }
+
+    @GetMapping("/EntretienProfessionnel/PlanAction/Reopen/{id}")
+    public boolean reopenAction(@PathVariable Long id) {
+        try {
+            entretienPlanActionRepository.updateReopen(id);
+            return true;
+        } catch (Exception e) {
+            HikaadLogger.error(e.toString());
+            return false;
+        }
+    }
+
     @PostMapping("/EntretienProfessionnel/Fiche/PlanAction/{collaborateurid}/{moyenid}/{delai}/{resultat}/{precision}")
     public EntretienPlanAction addItem(@PathVariable Long collaborateurid,
                                        @PathVariable String moyenid,

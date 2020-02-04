@@ -39,6 +39,12 @@ public class EntretienPlanAction {
     @Column(name = "Action")
     private String precision;
 
+    @Column(name = "Done")
+    private long done;
+
+    @Column(name = "Avancement")
+    private long avancement;
+
     public long getId() {
         return id;
     }
@@ -109,5 +115,21 @@ public class EntretienPlanAction {
 
     public void setCollaborateur(Salaries collaborateur) {
         this.collaborateur = collaborateur;
+    }
+
+    public long getDone() {
+        return done;
+    }
+
+    public void setDone(long done) {
+        this.done = done;
+    }
+
+    public long getAvancement() {
+        return avancement;
+    }
+
+    public void setAvancement(long avancement) {
+        this.avancement = avancement;
     }
 }
