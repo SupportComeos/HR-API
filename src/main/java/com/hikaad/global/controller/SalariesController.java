@@ -194,6 +194,7 @@ public class SalariesController {
                 historique.setDateentretien(simpleDateFormat.parse(dateentretien));
             }
             historique.setAnnee(Calendar.getInstance().get(Calendar.YEAR));
+            historique.setCauseid(1L);
             historiqueRepository.saveAndFlush(historique);
 
             Salaries salarie = salariesRepository.findOneSalarie(collaborateurid);
