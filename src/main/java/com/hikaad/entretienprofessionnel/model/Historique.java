@@ -1,5 +1,7 @@
 package com.hikaad.entretienprofessionnel.model;
 
+import com.hikaad.entretienevaluation.model.CauseReport;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,6 +21,13 @@ public class Historique {
 
     @Column(name = "Annee")
     private long annee;
+
+    @Column(name = "causeid")
+    private long causeid;
+
+    @ManyToOne
+    @JoinColumn(name="causeid", nullable = false, updatable = false, insertable = false)
+    private CauseReport cause;
 
     public long getId() {
         return id;
@@ -50,5 +59,21 @@ public class Historique {
 
     public void setAnnee(long annee) {
         this.annee = annee;
+    }
+
+    public long getCauseid() {
+        return causeid;
+    }
+
+    public void setCauseid(long causeid) {
+        this.causeid = causeid;
+    }
+
+    public CauseReport getCause() {
+        return cause;
+    }
+
+    public void setCause(CauseReport cause) {
+        this.cause = cause;
     }
 }

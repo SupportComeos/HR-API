@@ -151,6 +151,7 @@ public class SalariesController {
             historique.setCollaborateurid(collaborateurid);
             historique.setDateentretien(new Date());
             historique.setAnnee(Calendar.getInstance().get(Calendar.YEAR));
+            historique.setCauseid(caudereportid);
             historiqueRepository.saveAndFlush(historique);
 
             Salaries salarie = salariesRepository.findOneSalarie(collaborateurid);
@@ -218,7 +219,10 @@ public class SalariesController {
                           @PathVariable String heureentretien) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            salariesRepository.updateEPDate(collaborateurid, simpleDateFormat.parse(dateEntretien), heureentretien.split(":")[0], heureentretien.split(":")[1]);
+            Calendar c = Calendar.getInstance();
+            c.setTime(simpleDateFormat.parse(dateEntretien));
+            c.add(Calendar.HOUR, 24);
+            salariesRepository.updateEPDate(collaborateurid, c.getTime(), heureentretien.split(":")[0], heureentretien.split(":")[1]);
             return true;
         } catch (Exception e) {
             HikaadLogger.error(e.toString());
