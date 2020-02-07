@@ -6,7 +6,7 @@
 
     <groupId>com.hikaad</groupId>
     <artifactId>HRAPI</artifactId>
-    <version>1.0.11.25</version>
+    <version>1.0.2.7</version>
     <packaging>war</packaging>
     <name>Module API HR</name>
 

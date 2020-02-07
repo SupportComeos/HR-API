@@ -21,6 +21,7 @@ public class SalariesController {
 
     private SalariesRepository salariesRepository;
     private HistoriqueRepository historiqueRepository;
+    private static final String   DATEFORMAT = "dd-MM-yyyy";
 
     @Autowired
     public SalariesController(SalariesRepository salariesRepository, HistoriqueRepository historiqueRepository) {
@@ -190,7 +191,7 @@ public class SalariesController {
             if ("null".equals(dateentretien))
                 historique.setDateentretien(new Date());
             else {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATEFORMAT);
                 historique.setDateentretien(simpleDateFormat.parse(dateentretien));
             }
             historique.setAnnee(Calendar.getInstance().get(Calendar.YEAR));
@@ -204,7 +205,7 @@ public class SalariesController {
             if ("null".equals(dateentretien))
                 salarie.setDateentretienprofessionnel(new Date());
             else {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATEFORMAT);
                 salarie.setDateentretienprofessionnel(simpleDateFormat.parse(dateentretien));
             }
             return salariesRepository.saveAndFlush(salarie);
@@ -219,7 +220,7 @@ public class SalariesController {
                           @PathVariable String dateEntretien,
                           @PathVariable String heureentretien) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATEFORMAT);
             Calendar c = Calendar.getInstance();
             c.setTime(simpleDateFormat.parse(dateEntretien));
             c.add(Calendar.HOUR, 24);

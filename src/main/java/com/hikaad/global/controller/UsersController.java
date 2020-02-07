@@ -46,7 +46,8 @@ public class UsersController {
             return hashtext;
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            HikaadLogger.error(e.toString());
+            return "";
         }
     }
 }
