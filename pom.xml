@@ -6,7 +6,7 @@
 
     <groupId>com.hikaad</groupId>
     <artifactId>HRAPI</artifactId>
-    <version>1.0.2.7</version>
+    <version>1.0.3.4</version>
     <packaging>war</packaging>
     <name>Module API HR</name>
 
@@ -18,8 +18,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
         <start-class>com.hikaad.EntretienSuiviApplication</start-class>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.version>1.0.3.4</project.version>
     </properties>
 
     <dependencies>
@@ -87,7 +89,7 @@
     </dependencies>
 
     <build>
-        <finalName>HrApi-${project.version}</finalName>
+        <finalName>CoreApi-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

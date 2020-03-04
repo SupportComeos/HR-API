@@ -190,6 +190,15 @@ public class Salaries {
     @Column(name = "MinuteEP")
     private String minuteep;
 
+    @Column(name = "HeureEV")
+    private String heureev;
+
+    @Column(name = "MinuteEV")
+    private String minuteev;
+
+    @Column(name = "BienEtreAnnee")
+    private long bienetreannee;
+
     public long getId() {
         return id;
     }
@@ -652,5 +661,29 @@ public class Salaries {
 
     public void setMinuteep(String minuteep) {
         this.minuteep = minuteep;
+    }
+
+    public long getBienetreannee() {
+        return bienetreannee;
+    }
+
+    public void setBienetreannee(long bienetreannee) {
+        this.bienetreannee = bienetreannee;
+    }
+
+    public String getHeureev() {
+        return heureev;
+    }
+
+    public void setHeureev(String heureev) {
+        this.heureev = heureev;
+    }
+
+    public String getMinuteev() {
+        return minuteev;
+    }
+
+    public void setMinuteev(String minuteev) {
+        this.minuteev = minuteev;
     }
 }

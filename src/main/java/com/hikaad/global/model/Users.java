@@ -35,6 +35,12 @@ public class Users {
     @JoinColumn(name="SalarieID", nullable = false, updatable = false, insertable = false)
     private Salaries salaries;
 
+    @Column(name = "Authorization2")
+    private String authorization2;
+
+    @Column(name = "isAdmin2")
+    private long isAdmin2;
+
     public long getId() {
         return id;
     }
@@ -107,4 +113,19 @@ public class Users {
         this.salaries = salaries;
     }
 
+    public String getAuthorization2() {
+        return authorization2;
+    }
+
+    public void setAuthorization2(String authorization2) {
+        this.authorization2 = authorization2;
+    }
+
+    public long getIsAdmin2() {
+        return isAdmin2;
+    }
+
+    public void setIsAdmin2(long isAdmin2) {
+        this.isAdmin2 = isAdmin2;
+    }
 }
